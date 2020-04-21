@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="it" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>ajax-ex-boolflix</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header>
+      <input id="search" type="" value="" placeholder="Cerca un Film"><button id="button" type="">Cerca</button>
+    </header>
+    <script id="entry-template" type="text/x-handlebars-template">
+      <div class="lista-info">
+          <ul>
+            <li>{{title}}</li>
+            <li>{{original_title}}</li>
+            <li>{{original_language}}</li>
+            <li>{{vote_average}}</li>
+          </ul>
+      </div>
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="main.js" charset="utf-8"></script>
+  </body>
+</html>
