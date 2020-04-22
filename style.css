@@ -3,6 +3,14 @@
   padding: 0;
   box-sizing: border-box;
 }
+header{
+  height: 5vh;
+  width: 100vw;
+}
+#cont-film{
+  height: 95vh;
+  width: 100vw;
+}
 div{
   padding-bottom: 24px;
 }

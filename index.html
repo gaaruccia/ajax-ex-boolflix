@@ -4,19 +4,25 @@
     <meta charset="utf-8">
     <title>ajax-ex-boolflix</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/b11d814f49.js" crossorigin="anonymous"></script>
   </head>
   <body>
     <header>
-      <input id="search" type="" value="" placeholder="Cerca un Film"><button id="button" type="">Cerca</button>
+      <input id="search" type="" value="" placeholder="Cerca un Film">
+      <button id="button" type="">Cerca</button>
     </header>
-    <script id="entry-template" type="text/x-handlebars-template">
+    <div id="cont-film">
+
+    </div>
+    <script id="movie-template" type="text/x-handlebars-template">
       <div class="lista-info">
-          <ul>
-            <li>{{title}}</li>
-            <li>{{original_title}}</li>
-            <li>{{original_language}}</li>
-            <li>{{vote_average}}</li>
-          </ul>
+        <ul>
+          <li>{{title}}</li>
+          <li>{{original_title}}</li>
+          <li>{{original_language}}</li>
+          <li>{{vote_average}}</li>
+          <li>{{type}}</li>
+        </ul>
       </div>
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
