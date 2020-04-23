@@ -18,35 +18,7 @@ $(document).ready(function() {
       },
       success: function(risultato) {
         var listaFilm = risultato.results;
-        for (var i = 0; i < listaFilm.length; i++) {
-          listaFilm[i]
-          var filmCorrente = listaFilm[i]
-          var voto = filmCorrente.vote_average
-          var voto5 = parseInt(voto / 2);
-          var stelle = "";
-          for(var s = 1; s <= 5; s++) {
-            if(s <= voto5) {
-              stelle += '<i class="fas fa-star"></i>';
-            } else {
-              stelle += '<i class="far fa-star"></i>';
-            }
-          };
-          var arrayLanguage = ["it", "en"];
-          if(arrayLanguage.includes(filmCorrente.original_language)){
-            var bandiera = '<img src="img/' + filmCorrente.original_language + '.png" alt="">';
-          } else {
-            bandiera = filmCorrente.original_language;
-          };
-          var context = {
-            title: "Il titolo del film è :" + " " + filmCorrente.title,
-            original_title: "Il titolo originale del film è :" + " " + filmCorrente.original_title,
-            original_language: "La lingua originale del film è :" + " " + bandiera,
-            vote_average: "Il voto del film è :" + " " + stelle,
-            type: "Film",
-          };
-          var html = template(context);
-          contPage.append(html);
-        }
+        getListaOggetti(listaFilm, "Film");
       },
       error: function(){
         alert("Errore, chiamata fallita!");
@@ -62,40 +34,69 @@ $(document).ready(function() {
         query: filmVAl,
       },
       success: function(risultato) {
-        var listaSerieTv = risultato.results;
-        for (var i = 0; i < listaSerieTv.length; i++) {
-          listaSerieTv[i]
-          var serieTvCorrente = listaSerieTv[i]
-          var voto = serieTvCorrente.vote_average;
-          var voto5 = parseInt(voto / 2);
-          var stelle = "";
-          for(var s = 1; s <= 5; s++) {
-            if(s <= voto5) {
-              stelle += '<i class="fas fa-star"></i>';
-            } else {
-              stelle += '<i class="far fa-star"></i>';
-            }
-          };
-          var arrayLanguage = ["it", "en"];
-          if(arrayLanguage.includes(serieTvCorrente.original_language)){
-            var bandiera = '<img src="img/' + serieTvCorrente.original_language + '.png" alt="">';
-          } else {
-            bandiera = serieTvCorrente.original_language;
-          };
-          var context = {
-            title: "Il titolo del film è :" + " " + serieTvCorrente.name,
-            original_title: "Il titolo originale del film è :" + " " + serieTvCorrente.original_name,
-            original_language: "La lingua originale del film è :" + " " + bandiera,
-            vote_average: "Il voto del film è :" + " " + stelle,
-            type: "Serie TV",
-          };
-          var html = template(context);
-          contPage.append(html);
-        }
+        var listaSerieTV = risultato.results;
+        getListaOggetti(listaSerieTV, "Serie TV");
       },
       error: function(){
         alert("Errore, chiamata fallita!");
       },
     });
   });
+
+  function getListaOggetti(listaOggetti, tipo){
+    for (var i = 0; i < listaOggetti.length; i++) {
+      listaOggetti[i]
+      var filmCorrente = listaOggetti[i]
+      var title, original_title;
+      if (tipo === "Film") {
+        title = filmCorrente.title;
+        original_title = filmCorrente.original_title;
+      }else if (tipo === "Serie TV"){
+        title = filmCorrente.name
+        original_title = filmCorrente.original_name
+      };
+      var inizioUrl = "https://image.tmdb.org/t/p/"
+      var dimensioneImg = "w342"
+      var fineUrl = filmCorrente.poster_path
+      var urlCompleto = inizioUrl + dimensioneImg + fineUrl
+      var immagine = '<img src="' + urlCompleto + '" alt="">'
+      if (fineUrl === null) {
+        immagine = "L'immagine non è disponibile";
+      }
+      var context = {
+        poster_path: immagine,
+        title: "Il titolo è :" + " " + title,
+        original_title: "Il titolo originale è :" + " " + original_title,
+        original_language: "La lingua originale è :" + " " + linguaBandiere(filmCorrente.original_language),
+        vote_average: "Il voto è :" + " " + votoStelle(filmCorrente.vote_average),
+        type: tipo,
+      };
+      var html = template(context);
+      contPage.append(html);
+    };
+  };
+
+  function votoStelle(voto){
+    var voto5 = Math.ceil(voto / 2);
+    var stelle = "";
+    for(var s = 1; s <= 5; s++) {
+      if(s <= voto5) {
+        stelle += '<i class="fas fa-star"></i>';
+      } else {
+        stelle += '<i class="far fa-star"></i>';
+      }
+    };
+    return stelle;
+  };
+
+  function linguaBandiere(lingua){
+    var arrayLanguage = ["it", "en"];
+    var bandiera;
+    if(arrayLanguage.includes(lingua)){
+      bandiera = '<img src="img/' + lingua + '.png" alt="">';
+    } else {
+      bandiera = lingua;
+    };
+    return bandiera;
+  };
 });
