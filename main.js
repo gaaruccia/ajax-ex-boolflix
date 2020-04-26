@@ -61,7 +61,7 @@ $(document).ready(function() {
       var urlCompleto = inizioUrl + dimensioneImg + fineUrl
       var immagine = '<img src="' + urlCompleto + '" alt="">'
       if (fineUrl === null) {
-        immagine = "L'immagine non è disponibile";
+        immagine = '<img src="img/nondispo.png" alt="">';
       }
       var context = {
         poster_path: immagine,
@@ -69,6 +69,7 @@ $(document).ready(function() {
         original_title: "Il titolo originale è :" + " " + original_title,
         original_language: "La lingua originale è :" + " " + linguaBandiere(filmCorrente.original_language),
         vote_average: "Il voto è :" + " " + votoStelle(filmCorrente.vote_average),
+        overview: "Overview :" + "" + filmCorrente.overview,
         type: tipo,
       };
       var html = template(context);
@@ -99,4 +100,8 @@ $(document).ready(function() {
     };
     return bandiera;
   };
+
+  $("body").on("mouseenter mouseleave", ".contenitore", function(){
+    $(this).siblings(".info").toggle()
+  })
 });

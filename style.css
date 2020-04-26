@@ -4,13 +4,49 @@
   box-sizing: border-box;
 }
 header{
-  height: 5vh;
+  height: 10vh;
   width: 100vw;
+  background-color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+h1{
+  color: red;
+}
+body{
+  background-color: grey;
 }
 #cont-film{
-  height: 95vh;
+  height: 90%;
   width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  background-color: grey;
 }
-div{
-  padding-bottom: 24px;
+.info{
+  position: absolute;
+  width: 18%;
+  height: 56%;
+  background-color: black;
+  color: white;
+  border: white 1px solid;
+  display: none;
+}
+.lista-info{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 24px;
+  margin-bottom: 24px;
+  flex-basis: calc(100% / 3);
+}
+ul {
+list-style-type: none;
+}
+li{
+  font-size: 12px;
+  padding-bottom: 12px;
 }
