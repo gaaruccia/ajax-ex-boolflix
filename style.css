@@ -5,7 +5,7 @@
 }
 header{
   height: 10vh;
-  width: 100vw;
+  width: 100%;
   background-color: black;
   display: flex;
   justify-content: space-between;
@@ -19,7 +19,7 @@ body{
 }
 #cont-film{
   height: 90%;
-  width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: flex-start;
